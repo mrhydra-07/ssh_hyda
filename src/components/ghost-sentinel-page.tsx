@@ -63,6 +63,25 @@ const skills = [
   "Cloud Security",
 ];
 
+const dashboardItems = [
+  {
+    title: "World Attack Map",
+    details: "LATAM DDoS +38% | APAC phishing wave | EU brute-force cluster",
+  },
+  {
+    title: "Malware Activity",
+    details: "Loader: 42 | Infostealer: 17 | Ransomware beacons: 9",
+  },
+  {
+    title: "Threat Actor Tracker",
+    details: "Tracked groups: 12 active | 4 high-priority campaigns",
+  },
+  {
+    title: "Suspicious IP Monitor",
+    details: "Flagged IPs: 28 | Elevated risk score: 0.81",
+  },
+];
+
 function SectionShell({
   id,
   title,
@@ -134,7 +153,7 @@ export default function GhostSentinelPage() {
   const [feedIndex, setFeedIndex] = useState(0);
   const [showBoot, setShowBoot] = useState(true);
 
-  const activeLine = terminalLines[lineIndex] ?? terminalLines[0];
+  const activeLine = terminalLines[lineIndex];
 
   useEffect(() => {
     const clock = setInterval(() => {
@@ -233,25 +252,15 @@ export default function GhostSentinelPage() {
 
         <SectionShell id="dashboard" title="Threat Intelligence Dashboard">
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {["World Attack Map", "Malware Activity", "Threat Actor Tracker", "Suspicious IP Monitor"].map(
-              (title) => (
+            {dashboardItems.map((item) => (
                 <article
-                  key={title}
+                  key={item.title}
                   className="glass-panel rounded-xl border border-cyan-300/20 p-4 text-sm text-cyan-50/95"
                 >
-                  <h3 className="font-orbitron text-base text-cyan-100">{title}</h3>
-                  <p className="mt-3 font-jetbrains text-xs text-emerald-300">
-                    {title === "World Attack Map"
-                      ? "LATAM DDoS +38% | APAC phishing wave | EU brute-force cluster"
-                      : title === "Malware Activity"
-                        ? "Loader: 42 | Infostealer: 17 | Ransomware beacons: 9"
-                        : title === "Threat Actor Tracker"
-                          ? "Tracked groups: 12 active | 4 high-priority campaigns"
-                          : "Flagged IPs: 28 | Elevated risk score: 0.81"}
-                  </p>
+                  <h3 className="font-orbitron text-base text-cyan-100">{item.title}</h3>
+                  <p className="mt-3 font-jetbrains text-xs text-emerald-300">{item.details}</p>
                 </article>
-              ),
-            )}
+              ))}
             <article className="glass-panel rounded-xl border border-cyan-300/20 p-4 sm:col-span-2 lg:col-span-3">
               <h3 className="font-orbitron text-base text-cyan-100">Live Threat Feed</h3>
               <div className="mt-3 space-y-2 font-jetbrains text-xs text-cyan-100/90">
